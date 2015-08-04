@@ -1,0 +1,22 @@
+{
+  "name": "GiooDev-passenger",
+  "version": "0.1.0",
+  "author": "Julien Georges",
+  "summary": "Puppet module to install Passenger from official repository and configure it for Apache/Puppet.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/GiooDev/puppetm-passenger",
+  "project_page": "https://github.com/GiooDev/puppetm-passenger",
+  "issues_url": "https://github.com/GiooDev/puppetm-passenger/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemmajrelease": [ "6", "7" ]
+    }
+  ],
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.5.0"},
+    {"name":"puppetlabs-apache","version_requirement":">= 1.5.0"},
+    {"name":"GiooDev-puppet","version_requirement":">= 0.1.0"}
+  ]
+}
+
