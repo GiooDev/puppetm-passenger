@@ -9,13 +9,12 @@
 class passenger::config inherits passenger {
 
     class { 'puppet':
-        repository => ${passenger::repository},
+        repository => $passenger::repository,
         ssldir     => "${passenger::ssldir}",
     } ->
     class { 'puppet::server':
         enable    => false,
         ensure    => 'stopped',
-        certname  => 'puppet',
         passenger => true,
     }
 
@@ -54,6 +53,7 @@ class passenger::config inherits passenger {
         ssl_cipher        => 'ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP',
         ssl_cert          => "${ssldir}/certs/${puppet::server::certname}.pem",
         ssl_key           => "${ssldir}/private_keys/${puppet::server::certname}.pem",
+        #TODO: Problem when applying with puppet agent, these 2 files doesn't exists...
         ssl_chain         => "${ssldir}/ca/ca_crt.pem",
         ssl_ca            => "${ssldir}/ca/ca_crt.pem",
         # If Apache complains about invalid signatures on the CRL, you can try disabling
