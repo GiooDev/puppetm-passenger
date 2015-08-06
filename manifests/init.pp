@@ -49,6 +49,7 @@ class passenger (
     $pool_idle_time     = 600,
     $stat_throttle_rate = 120,
     $max_requests       = undef,
+    $ca_master          = true, 
 
     $repository         = true,
 ) inherits passenger::params {

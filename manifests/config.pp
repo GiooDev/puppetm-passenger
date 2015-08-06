@@ -18,6 +18,14 @@ class passenger::config inherits passenger {
         passenger => true,
     }
 
+    if $ca_master { # If this server is the CA Master
+        $ca_crt = 'ca/ca_crt.pem'
+        $ca_crl = 'ca/ca_crl.pem'
+    } else {
+        $ca_crt = 'certs/ca.pem'
+        $ca_crl = 'crl.pem'
+    }
+
     include ::apache
     # Creating configuration directories before starting apache
     exec { "/bin/mkdir -p ${rack_path}":
@@ -53,12 +61,11 @@ class passenger::config inherits passenger {
         ssl_cipher        => 'ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP',
         ssl_cert          => "${ssldir}/certs/${puppet::server::certname}.pem",
         ssl_key           => "${ssldir}/private_keys/${puppet::server::certname}.pem",
-        #TODO: Problem when applying with puppet agent, these 2 files doesn't exists...
-        ssl_chain         => "${ssldir}/ca/ca_crt.pem",
-        ssl_ca            => "${ssldir}/ca/ca_crt.pem",
+        ssl_chain         => "${ssldir}/${ca_crt}",
+        ssl_ca            => "${ssldir}/${ca_crt}",
         # If Apache complains about invalid signatures on the CRL, you can try disabling
         # CRL checking by commenting the next line, but this is not recommended.
-        ssl_crl           => "${ssldir}/ca/ca_crl.pem",
+        ssl_crl           => "${ssldir}/${ca_crl}",
         ssl_verify_client => 'optional',
         ssl_verify_depth  => 1,
         ssl_options       => [ '+StdEnvVars', '+ExportCertData' ],
