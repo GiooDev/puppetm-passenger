@@ -45,7 +45,7 @@ class passenger (
     $rack_path          = '/usr/share/puppet/rack/puppetmasterd/',
     $ssldir             = '/var/lib/puppet/ssl',
     #apache::mod::passenger configurations
-    $max_pool_size      = 24,
+    $max_pool_size      = 12,
     $pool_idle_time     = 600,
     $stat_throttle_rate = 120,
     $max_requests       = undef,
