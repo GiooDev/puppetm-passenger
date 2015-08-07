@@ -8,16 +8,16 @@
 #
 class passenger::config inherits passenger {
 
-    class { 'puppet':
-        repository => $passenger::repository,
-        ssldir     => "${passenger::ssldir}",
-    } ->
-    class { 'puppet::server':
-        enable    => false,
-        ensure    => 'stopped',
-        passenger => true,
-        ca_master => $passenger::ca_master,
-    }
+#    class { 'puppet':
+#        repository => $passenger::repository,
+#        ssldir     => "${passenger::ssldir}",
+#    } ->
+#    class { 'puppet::server':
+#        enable    => false,
+#        ensure    => 'stopped',
+#        passenger => true,
+#        ca_master => $passenger::ca_master,
+#    }
 
     if $ca_master { # If this server is the CA Master
         $ca_crt = 'ca/ca_crt.pem'
