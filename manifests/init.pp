@@ -28,10 +28,39 @@
 #
 # === Examples
 #
-#  class { 'passenger':
-#    rack_path  => '/var/www/html/puppet/rack/puppetmasterd/',
-#    repository => false,
-#  }
+#    class { 'puppet':
+#        repository  => false,
+#
+#        #Default values...
+#        #ssldir     => '/var/lib/puppet/ssl',
+#        #repository => true,
+#    } ->
+#    class { 'puppet::server':
+#        passenger       => true,
+#        dns_alt_names   => "puppet,puppet.${::domain}",
+#
+#        #Default values...
+#        #environmentpath => '$confdir/environments',
+#        #external_nodes  => '/usr/local/bin/puppet_node_classifier',
+#        #passenger       => false,
+#        #certname        => $::fqdn,
+#        #dns_alt_names   => undef,
+#        #ca_master       => true,
+#    }->
+#    class { 'passenger':
+#        rack_path           => '/var/www/html/puppet/rack/puppetmasterd',
+#        repository          => false,
+#
+#        #Default values...
+#        #rack_path          => '/usr/share/puppet/rack/puppetmasterd',
+#        #ssldir             => '/var/lib/puppet/ssl',
+#        #max_pool_size      => 12,
+#        #pool_idle_time     => 600,
+#        #stat_throttle_rate => 120,
+#        #max_requests       => undef,
+#        #ca_master          => true,
+#        #repository         => true,
+#    }
 #
 # === Authors
 #
@@ -42,7 +71,7 @@
 # Copyright 2015 Julien Georges
 #
 class passenger (
-    $rack_path          = '/usr/share/puppet/rack/puppetmasterd/',
+    $rack_path          = '/usr/share/puppet/rack/puppetmasterd',
     $ssldir             = '/var/lib/puppet/ssl',
     #apache::mod::passenger configurations
     $max_pool_size      = 12,
