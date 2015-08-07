@@ -16,6 +16,7 @@ class passenger::config inherits passenger {
         enable    => false,
         ensure    => 'stopped',
         passenger => true,
+        ca_master => $passenger::ca_master,
     }
 
     if $ca_master { # If this server is the CA Master
