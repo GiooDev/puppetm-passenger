@@ -1,5 +1,6 @@
 # a config.ru, for use with every rack-compatible webserver.
 # SSL needs to be handled outside this, though.
+Encoding.default_external = Encoding::UTF_8
 
 # if puppet is not in your RUBYLIB:
 # $LOAD_PATH.unshift('/opt/puppet/lib')
