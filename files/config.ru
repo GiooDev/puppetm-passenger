@@ -12,11 +12,17 @@ $0 = "master"
 
 ARGV << "--rack"
 
-# Rack applications typically don't start as root.  Set --confdir and --vardir
-# to prevent reading configuration from ~puppet/.puppet/puppet.conf and writing
-# to ~puppet/.puppet
+# Rack applications typically don't start as root.  Set --confdir, --vardir,
+# --logdir, --rundir to prevent reading configuration from ~/ based pathing.
 ARGV << "--confdir" << "/etc/puppet"
 ARGV << "--vardir"  << "/var/lib/puppet"
+ARGV << "--logdir"  << "/var/log/puppet"
+ARGV << "--rundir"  << "/var/run/puppet"
+
+# always_cache_features is a performance improvement and safe for a master to
+# apply. This is intended to allow agents to recognize new features that may be
+# delivered during catalog compilation.
+ARGV << "--always_cache_features"
 
 # NOTE: it's unfortunate that we have to use the "CommandLine" class
 #  here to launch the app, but it contains some initialization logic
