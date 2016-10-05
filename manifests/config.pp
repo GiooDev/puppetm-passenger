@@ -45,15 +45,17 @@ class passenger::config inherits passenger {
     } ->
     # passenger settings
     class { '::apache::mod::passenger':
-        passenger_high_performance   => 'On',
+        passenger_high_performance       => 'On',
         # PassengerMaxPoolSize control number of application instances,
         # typically 1.5x the number of processor cores.
-        passenger_max_pool_size      => $max_pool_size,
+        passenger_max_pool_size          => $max_pool_size,
         # Shutdown idle Passenger instances after 10 min.
-        passenger_pool_idle_time     => $pool_idle_time,
-        passenger_stat_throttle_rate => $stat_throttle_rate,
+        passenger_pool_idle_time         => $pool_idle_time,
+        passenger_stat_throttle_rate     => $stat_throttle_rate,
         # Restart ruby process after handling specific number of request to resolve MRI memory leak.
-        passenger_max_requests       => $max_requests,
+        passenger_max_requests           => $max_requests,
+        # Maximum number of incoming requests queue (100 by default)
+        passenger_max_request_queue_size => $max_request_queue_size,
     } ->
     apache::vhost { 'puppetmaster':
         port              => 8140,
